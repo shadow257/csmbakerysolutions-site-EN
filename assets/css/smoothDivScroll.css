@@ -1,0 +1,6 @@
+﻿div.scrollingHotSpotLeft { width:33px; height:112px; position:absolute; z-index:200; left:55px; top:285px; display:block; background:url(arrowLeft.png) no-repeat left top; }
+div.scrollingHotSpotLeftVisible { background-image:url(arrowLeft.png); background-repeat:no-repeat;zoom:1; }
+div.scrollingHotSpotRight { display:block;  width:33px; height:112px; position:absolute; z-index:200; right:55px;top:285px; background:url(arrowRight.png) no-repeat left top; }
+div.scrollingHotSpotRightVisible { background-image:url(arrowRight.png); background-repeat:no-repeat; zoom:1; }
+div.scrollWrapper { position:relative; overflow:hidden; width:100%; height:100%; }
+div.scrollableArea { position:relative; width:auto; height:100%; }

@@ -1,0 +1,35 @@
+.simply-scroll-container { position:relative; }
+.simply-scroll-clip { position:relative; overflow:hidden; }
+.simply-scroll-list { overflow:hidden; padding:0; list-style:none; }
+.simply-scroll-list li { padding:0; margin:0; list-style:none; }
+.simply-scroll-list li img { border:none; display:block; }
+.simply-scroll-btn { position:absolute; width:33px; height:112px; z-index:3; cursor:pointer; }
+.simply-scroll-btn-left { left:55px; top:285px; background-image:url(arrowLeft.png); }
+.simply-scroll-btn-left.disabled { background-position:0 0!important; }
+.simply-scroll-btn-left:hover, .simply-scroll-btn-left:focus { }
+.simply-scroll-btn-right { right:55px; top:285px; background-image:url(arrowRight.png); }
+.simply-scroll-btn-right.disabled { background-position:-84px 0!important; }
+.simply-scroll-btn-right:hover, .simply-scroll-btn-right:focus { }
+.simply-scroll-btn-up { right:6px; top:6px; background-position:-126px -44px; }
+.simply-scroll-btn-up.disabled { background-position:-126px 0!important; }
+.simply-scroll-btn-up:hover, .simply-scroll-btn-up:focus { background-position:-126px -88px; }
+.simply-scroll-btn-down { right:6px; bottom:6px; background-position:-42px -44px; }
+.simply-scroll-btn-down.disabled { background-position:-42px 0!important; }
+.simply-scroll-btn-down:hover, .simply-scroll-btn-down:focus { background-position:-42px -88px; }
+.simply-scroll-btn-pause { right:6px; bottom:6px; background-position:-168px -44px; }
+.simply-scroll-btn-pause:hover, .simply-scroll-btn-pause:focus { background-position:-168px -88px; }
+.simply-scroll-btn-pause.active { background-position:-84px -44px; }
+.simply-scroll-btn-pause.active:hover, .simply-scroll-btn-pause.active:focus { background-position:-84px -88px; }
+.simply-scroll { float:left; margin-bottom:0!important; height:590px!important; width:100%; }
+.simply-scroll .simply-scroll-clip { height:689px!important; }
+.simply-scroll .simply-scroll-list li { float:left; width:180px; height:689px; }
+.vert { width:340px; height:400px; margin-bottom:1.5em; }
+.vert .simply-scroll-clip { width:290px; height:400px; }
+.vert .simply-scroll-list li { width:290px; height:200px; }
+.vert .simply-scroll-btn-up { right:0; top:0; }
+.vert .simply-scroll-btn-down { right:0; top:52px; }
+/*.leftonhover { float: left; height: 10px; left: 25px; position: absolute; text-align: center; top: 505px; width: 120px; z-index: 3; }
+.rightonhover { float: right; height: 10px; position: absolute; right: 25px; text-align: center; top: 505px; width: 120px; z-index: 3; }
+.leftoffhover { float: left; height: 10px; left: 25px; position: absolute; text-align: center; top: 505px; width: 120px; z-index: 3; }
+.rightoffhover { float: right; height: 10px; position: absolute; right: 25px; text-align: center; top: 505px; width: 120px; z-index: 3; }*/
+.content { height: 100%; width: 100%; }

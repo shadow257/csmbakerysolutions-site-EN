@@ -1,0 +1,23 @@
+.jcarousel-wrapper { margin: 46px 0 20px; position: relative; float:left; width:100%; }
+.jcarousel-wrapper .photo-credits { font-size: 13px; color: #fff; float:left; width:100%; margin:0px; line-height:26px; text-align:center; font-family:arial;}
+
+/** Carousel **/
+
+.jcarousel { position: relative; overflow: hidden; width: 130px; height: 110px;}
+.jcarousel ul { height: 20000em; position: relative; list-style: none; margin: 0; padding: 0; }
+.jcarousel li { height:110px; padding-top:5px; }
+/** Carousel Controls **/
+
+.jcarousel-control-prev, .jcarousel-control-next { position: absolute; width: 30px; height: 30px; text-align: center; color: #4E443C; text-decoration: none; text-shadow: 0 0 1px #000; }
+.jcarousel-control-prev { top: -35px; left:53px;background: url(../../../assets/images/up.png) no-repeat left top transparent; }
+.jcarousel-control-next { bottom: -35px;  left:53px; background: url(../../../assets/images/down.png) no-repeat left top transparent;}
+.jcarousel-control-prev:hover span, .jcarousel-control-next:hover span { display: block; }
+.jcarousel-control-prev.inactive{cursor: default;background: url(../../../assets/images/up_dis.png) no-repeat left top transparent;}
+.jcarousel-control-next.inactive { cursor: default;background: url(../../../assets/images/down_dis.png) no-repeat left top transparent; }
+/** Carousel Pagination **/
+
+.jcarousel-pagination { position: absolute; bottom: 0; left: 15px; }
+.jcarousel-pagination a { text-decoration: none; display: inline-block; font-size: 11px; line-height: 14px; min-width: 14px; background: #fff; color: #4E443C; border-radius: 14px; padding: 3px; text-align: center; margin-right: 2px; opacity: .75; }
+.jcarousel-pagination a.active { background: #4E443C; color: #fff; opacity: 1; text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.75); }
+/*.wrapper { max-width: 130px; padding: 15px; margin: auto; background:#000000; height:260px; }
+img { float:left; }*/

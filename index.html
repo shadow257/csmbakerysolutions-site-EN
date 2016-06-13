@@ -1,0 +1,1266 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>CSM Bakery Solutions - Home</title>
+<base href="http://stage.csmbakerysolutions.com/en/" />
+<link rel="stylesheet" href="fonts/MyFontsWebfontsKit_Bold.css" type="text/css">
+<link rel="stylesheet" href="fonts/MyFontsWebfontsKit.css"  type="text/css">
+<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5 maximum-scale=1.0">
+<meta name="description" content="" />
+<link type="text/css" rel="stylesheet" href="http://stage.csmbakerysolutions.com/style/latowebkit.css" />
+<link type="text/css" rel="stylesheet" href="http://stage.csmbakerysolutions.com/style/master-style.css" />
+<link type="text/css" rel="stylesheet" href="http://stage.csmbakerysolutions.com/style/responsive.css" />
+<link type="text/css" rel="stylesheet" href="http://stage.csmbakerysolutions.com/style/videohomestyle.css" />
+<link type="text/css" rel="stylesheet" href="http://stage.csmbakerysolutions.com/style/chrome-specific.css" />
+<link type="text/css" rel="stylesheet" href="assets/bigvideo/colorbox.css" />
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>-->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="assets/bigvideo/jquery-ui.js"></script>
+<script src="assets/bigvideo/jquery-ui.min.js"></script>
+<script src="assets/bigvideo/video.js"></script>
+<script src="assets/bigvideo/bigvideo.js"></script>
+<script src="assets/bigvideo/fullscreen.js"></script>
+<script src="assets/bigvideo/scrollEffect.js"></script>
+<script src="assets/bigvideo/jquery.fullscreen.min.js"></script>
+<script src="assets/bigvideo/jquery.colorbox.js"></script>
+<!--<script type="text/javascript" src="assets/bigvideo/jquery.jcarousel.min.js"></script>-->
+<script type="text/javascript" src="assets/js/jquery.bxslider.js"></script>
+<script type="text/javascript">
+	function msieversion() {
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+		var isIE11 = !!navigator.userAgent.match(/Trident.*rv\:11\./);		
+		if (msie > 0)   
+		{	
+			var ww=$(window).width();
+			var wh=$(window).height();
+			$(".bigPlayLink").css({"display":"none"});
+			$(".requestfullscreen").css({"display":"block"});
+			$(".cboxIframe").css({"overflow":"hidden"});
+			$(".requestfullscreen").colorbox({iframe:true,scrolling: false, width:ww, height:wh});	
+			mainVideo.getPlayer().volume(0);
+		}
+		else if(isIE11==true)
+		{
+			var ww=$(window).width();
+			var wh=$(window).height();
+			$(".bigPlayLink").css({"display":"none"});
+			$(".requestfullscreen").css({"display":"block"});
+			$(".cboxIframe").css({"overflow":"hidden"});
+			$(".requestfullscreen").colorbox({iframe:true,scrolling: false, width:ww, height:wh});
+			mainVideo.getPlayer().volume(0);
+		}
+		else
+		{
+			// for another browser
+			return false;
+		}
+	}
+	function loopLogos(){
+		var ww = $(window).width();	
+		$(".slideWrapper").html("");
+		
+		$(".slideWrapper").html($("#slidersource").html());
+		var bxViewportwidth = $(".slideWrapper").width();
+                var maxSlideNumber = 9;
+		if (ww >= 1306)
+		{
+			bxViewportwidth = bxViewportwidth / 7;
+                        maxSlideNumber = 9;
+		}
+		else if (ww >= 1206 && ww <= 1305)
+		{
+			bxViewportwidth = bxViewportwidth / 6;
+                        maxSlideNumber = 8;
+		}
+		else if (ww >= 1106 && ww <= 1205)
+		{
+			bxViewportwidth = bxViewportwidth / 6;
+                        maxSlideNumber = 7;
+		}
+		else if (ww >= 1025 && ww <= 1105)
+		{
+			bxViewportwidth = bxViewportwidth / 5;
+                        maxSlideNumber = 5;
+		}
+		else if (ww >= 800 && ww <= 1024)
+		{
+			bxViewportwidth = bxViewportwidth / 4;
+                        maxSlideNumber = 4;
+		}
+		else if (ww >= 768 && ww <= 800)
+		{
+			bxViewportwidth = bxViewportwidth / 3;
+                        maxSlideNumber = 3;
+		}
+		else if (ww >= 480 && ww <= 767)
+		{
+			bxViewportwidth = bxViewportwidth / 2;
+                        maxSlideNumber = 2;
+		}
+		else if (ww >= 320 && ww <= 479)
+		{
+			bxViewportwidth = bxViewportwidth / 1;
+                        maxSlideNumber = 1;
+		}
+		var slider =jQuery('#client-slider').bxSlider({
+			auto:true,
+			autoControls:true,
+			minSlides: 1,
+			maxSlides: maxSlideNumber,   
+                        moveSlides: 1,
+                        randomStart: false,
+                         pager: true,
+			slideWidth: bxViewportwidth
+		});
+	}
+	//video speed calculate
+	var varSpeed = 0;	
+	var imageAddr = "assets/images/banner/Our-Customers_Banner_Cropped.jpg"; 
+	var downloadSize = 131736; //bytes
+	function MeasureConnectionSpeed() {
+		var startTime, endTime;
+		var download = new Image();
+		download.onload = function () {
+			endTime = (new Date()).getTime();
+			showResults();
+			//console.log("load");
+			startvideo();
+		}		
+		download.onerror = function (err, msg) {
+			varSpeed = 0;
+			//console.log("end");
+			startvideo();
+		}		
+		startTime = (new Date()).getTime();
+		var cacheBuster = "?nnn=" + startTime;
+		download.src = imageAddr + cacheBuster;
+		function showResults() {
+			var duration = (endTime - startTime) / 1000;
+			var bitsLoaded = downloadSize * 8;
+			var speedBps = (bitsLoaded / duration).toFixed(2);
+			var speedKbps = (speedBps / 1024).toFixed(2);
+			var speedMbps = (speedKbps / 1024).toFixed(2);  
+			//alert(speedMbps + "asdf");
+			varSpeed = speedMbps;
+			//alert("Speed: "+varSpeed);
+		}
+	}
+	//video speed calculate End
+	$(document).ready(function(){
+		this.fullScreenMode = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen; // This will return true or false depending on if it's full screen or not.		
+		$(document).on ('mozfullscreenchange webkitfullscreenchange fullscreenchange',function(){
+			this.fullScreenMode = !this.fullScreenMode;			
+			//console.log(this.fullScreenMode);
+			if(!this.fullScreenMode){
+				$(".controlPanel").css({"display":"none"});
+			}
+		});
+		
+		if( msieversion()>0 && msieversion()<=10)
+		{
+			//alert(msieversion());
+			$("#fullScreen").css("visibility", "hidden" );
+			$(".videoClip2, .videoClipOuter2, #controlWrapper2").css({"display":"none"});
+		}		
+		$(".fullScreen").toggle(function(){
+			$(this).addClass("fullScreened");
+		}, function() {
+			$(this).removeClass("fullScreened");
+		});
+		$(".allNavDesktop").click(function(){
+			$(".mobileNav").toggle();
+		});
+		var ww = $(window).width();
+		var wh = $(window).height();
+		var headerHeight = $(".headercontainer").height();
+		var footerHeight = $(".btmHeader").height();			
+		var total = headerHeight + footerHeight;
+		var whd = wh-total;
+		var wid = (ww-1306)/2;
+		if(ww > 1306)
+		{
+			$(".controlPanel").css({'bottom':60,'right':wid});
+			$(".slideInfo").css({'top':47,'right':wid});			
+		}
+		else
+		{
+			$(".controlPanel").css({'bottom':60,'right':'0px'});
+			$(".slideInfo").css({'top':40,'right':'11px'});
+		}
+		if(ww >= 768)//945
+		{			
+			$(".mainContainer").css({"height":600});
+			$("#big-video-wrap, .videoClipOuter2").css({"height":600});			
+		}
+		else
+		{			
+			$(".mainContainer").css({"height":$("#big-video-vid_html5_api").height()});
+			$("#big-video-wrap").css({"height":$("#big-video-vid_html5_api").height(),"position":"relative","width":"100%"});			
+		}	
+		loopLogos();	
+		buttons();
+		boxsize();				
+		msieversion();
+		if(ww <= 767)
+		{
+		  if (navigator.userAgent.match(/(iphone)/i))
+		  {
+			  $("#big-video-vid_html5_api").load(function(){
+				  $(".videoClipOuter2").css({"height":$("#big-video-vid_html5_api").height()});
+			  });
+			  $(".allNav").click(function(){                       
+				  if($(".mobileTopnavigation").css('display')=='none')
+				  {                           
+					  $(".videoClip2,.videoClipOuter2, .autoCenterOverlay, .autoCenterOverlay span").css({"display":"block"});
+					  $(".mobileTopnavigation").css({"z-index":"999999"});
+					  $("#big-video-vid_html5_api, .mobileVideoSection").css({"visibility":"hidden"});                       
+				  }
+				  if($(".mobileTopnavigation").css('display')=='block')
+				  {                           
+					  $(".videoClip2,.videoClipOuter2, .autoCenterOverlay, .autoCenterOverlay span").css({"display":"none"});   
+					  $("#big-video-vid_html5_api, .mobileVideoSection").css({"visibility":"visible"});
+				  }                   
+			  });
+		  }
+		}
+	});	
+	$(window).resize(function(){		
+		$("#big-video-vid_html5_api").css({"width":"100%","height":"600px"});
+		var ww = $(window).width();
+		var wh = $(window).height();		
+		var headerHeight = $(".headercontainer").height();
+		var footerHeight = $(".btmHeader").height();
+		var total = headerHeight + footerHeight;
+		var whd = wh-total;
+		var wid = (ww-1306)/2;
+		if(ww >= 768)//945
+		{			
+			$(".mainContainer").css({"height":600});
+			$("#big-video-wrap").css({"height":600});
+			$(".banner, .videoContainer").css({"height":600});
+			//$(".slidesjs-control").css({"transitionDuration": "0ms","transform":"translateX(-485px)"})
+		}
+		else
+		{			
+			$(".mainContainer").css({"min-height":$("#big-video-vid_html5_api").height(),"height":"auto"});
+			$("#big-video-wrap").css({"min-height":$("#big-video-vid_html5_api").height(),"height":"auto"});			
+		}
+		if(ww > 1306)
+		{
+			$(".slideInfo").css({'top':47,'right':wid});
+			$(".controlPanel").css({'bottom':60,'right':wid});			
+		}
+		else
+		{
+			$(".slideInfo").css({'top':40,'right':'11px'});
+			$(".controlPanel").css({"bottom":60,'right':'0px'});			
+		}
+		if(ww <= 767)
+		{
+			$(".controlPanel").css({"position":"relative","bottom":60});
+			var homeHeight = $(".homeContainer").height();
+			//$(".banner, .videoContainer").css({"height":homeHeight});
+                        $(".banner, .videoContainer").css({"height":300});
+		}
+		else
+		{
+			$(".controlPanel").css({"position":"absolute","bottom":60});
+		}		
+		displayContent();	
+		loopLogos();
+		boxsize();
+		if (ww <= 1024 && ww >= 780)
+		{
+			$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":600});			
+		}
+		else if (ww <= 779 && ww >= 768)
+		{
+			$(".mobileVideoSection video, .videoClip2").css({"width":"auto","height":600});		
+		}	
+		else if(ww <= 767 && ww >= 640)
+		{
+			$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":350});
+		}
+		else if(ww <= 639 && ww >= 361)
+		{
+			$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":300});				
+		}
+		else if(ww <= 360)
+		{
+			$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":200});				
+		}
+		msieversion();
+	});
+	
+	$(window).load(function(){
+		$("#loader").css({"display":"none"});
+		var ww=$(window).width();
+		var wh=$(window).height();
+		MeasureConnectionSpeed();
+		//startvideo();
+		var headerHeight = $(".headercontainer").height();
+		var footerHeight = $(".btmHeader").height();
+		var total = headerHeight + footerHeight;
+		var whd = wh-total;
+		if(ww >= 768)//945
+		{			
+			$(".mainContainer").css({"height":600});
+			$("#big-video-wrap, .videoClipOuter2").css({"height":600});			
+		}
+		else
+		{				
+			$(".mainContainer").css({"min-height":$("#big-video-vid_html5_api").height(),"height":"auto"});
+			$("#big-video-wrap").css({"min-height":$("#big-video-vid_html5_api").height(),"position":"relative","width":"100%","height":"auto"});
+
+		}	
+		if(ww <= 767)
+		{
+			$(".controlPanel").css({"position":"relative","bottom":60});
+			var homeHeight = $(".homeContainer").height();
+			var heightvalue = homeHeight + 10;
+			//$(".banner, .videoContainer").css({"height":heightvalue});
+                        $(".banner, .videoContainer").css({"height":300});	
+			$(".controlPanel").css({"display":"none"});	
+		}
+		else
+		{
+			$(".controlPanel").css({"position":"absolute",'bottom':60});	
+			
+		}
+		if($(window).width() >= 768 && $(window).width() < 785)
+		{			
+			$(".mainContainer").css({"height":600});
+			$("#big-video-wrap").css({"height":600});	
+			$(".controlPanel").css({"position":"absolute",'bottom':60});
+			//alert("load 768");
+		}
+		displayContent();	
+		loopLogos();	
+		boxsize();		
+		msieversion();
+	});	
+	function boxsize(){
+		
+		var ww=$(window).width();
+		if(ww >= 1125)
+		{
+			console.log($(".boxImage").height());
+//			var calloutImg = $(".boxImage").height() - 71;
+			var calloutImg = $(".boxImage").height() - 0;
+calloutImg = 309;
+			$(".boxDetail").css({"height":calloutImg});
+			var calloutImgOne = $("#boxImageOne").height();
+			//$("#boxDetailOne").css({"height":calloutImgOne});
+			var calloutImgThree = $("#boxImageThree").height();
+			//$("#boxDetailThree").css({"height":calloutImgThree});
+			$("#boxDetailTwo .boxImage").css({"height":$("#boxDetailTwo.boxDetail").height()});
+			$("#boxDetailFour .boxImage").css({"height":$("#boxDetailFour.boxDetail").height()});
+			$("#boxDetailOne .boxImage").css({"height":$("#boxDetailOne.boxDetail").height()});
+			$("#boxDetailThree .boxImage").css({"height":$("#boxDetailThree.boxDetail").height()});
+		}
+		else if(ww <= 1124 && ww >=1025 )//945
+		{
+//			var calloutImg = $(".boxImage").height() - 51;
+			var calloutImg = $(".boxImage").height() - 0;
+calloutImg = 309;
+			$(".boxDetail").css({"height":calloutImg});
+			var calloutImgOne = $("#boxImageOne").height();
+			//$("#boxDetailOne").css({"height":calloutImgOne});
+			var calloutImgThree = $("#boxImageThree").height();
+			//$("#boxDetailThree").css({"height":calloutImgThree});
+
+
+			$("#boxDetailTwo .boxImage").css({"height":$("#boxDetailTwo.boxDetail").height()});
+			$("#boxDetailFour .boxImage").css({"height":$("#boxDetailFour.boxDetail").height()});
+			$("#boxDetailOne .boxImage").css({"height":$("#boxDetailOne.boxDetail").height()});
+			$("#boxDetailThree .boxImage").css({"height":$("#boxDetailThree.boxDetail").height()});
+		}
+		else if(ww <= 1024)
+		{
+//			var calloutImg = $(".boxImage").height() - 71;
+			var calloutImg = $(".boxImage").height() - 0;
+calloutImg = 309;
+			$(".boxDetail").css({"height":calloutImg});
+			var calloutImgOne = $("#boxImageOne").height();
+			//$("#boxDetailOne").css({"height":calloutImgOne});
+			var calloutImgThree = $("#boxImageThree").height();
+			//$("#boxDetailThree").css({"height":calloutImgThree});
+			$("#boxDetailTwo .boxImage").css({"height":$("#boxDetailTwo.boxDetail").height()});
+			$("#boxDetailFour .boxImage").css({"height":$("#boxDetailFour.boxDetail").height()});
+			$("#boxDetailOne .boxImage").css({"height":$("#boxDetailOne.boxDetail").height()});
+			$("#boxDetailThree .boxImage").css({"height":$("#boxDetailThree.boxDetail").height()});
+		}		
+	}
+	function displayContent(){
+		var ww=$(window).width();
+		var wh=$(window).height();
+		var headerHeight = $(".headercontainer").height();
+		var footerHeight = $(".btmHeader").height();			
+		var total = headerHeight + footerHeight;
+		var whd = wh-total;
+		$("#volume, #fullScreen").css({"display":"block"});
+		$(".controlPanel").css({"width":"353px"});	
+		//$(".main li a").css({"margin-left":"30px"});
+		if(ww >= 1302)
+		{
+			$(".main li a").css({'margin-left':30});
+		}
+		else if(ww >= 1122 && ww <= 1301)
+		{
+			$(".main li a").css({'margin-left':8});
+		}
+		else if(ww <= 1121)
+		{
+			$(".main li a").css({'margin-left':5});
+		}
+		if (navigator.userAgent.match(/(opera mini|ipod|iphone|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo|nokia|blackberry|pre\/0.1|android)/i))
+		{			
+			$("#volume, #fullScreen, .ivxBlock").css({"display":"none"});
+			$(".controlPanel").css({"display":"none"});			
+			$("#big-video-vid_html5_api").load(function(){
+				$(".videoClipOuter2").css({"height":$("#big-video-vid_html5_api").height()});
+			});
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"block"});
+			$(".videoClip2").attr("src", "assets/images/mobile-home-image.jpg") ;
+//			if(ww <= 767)
+//			{
+//				if (navigator.userAgent.match(/(iphone)/i))
+//				{
+//					$("#big-video-vid_html5_api").load(function(){
+//						$(".videoClipOuter2").css({"height":$("#big-video-vid_html5_api").height()});
+//					});
+//					$(".allNavDesktop").click(function(){
+//						if($(".mobileNav").css('display')=='block' || $(".mobileNav").css('display')=='inline')
+//						{					
+//							$(".videoClip2, .videoClipOuter2, #controlWrapper2").css({"display":"block"});
+//							$("#big-video-vid_html5_api").css({"visibility":"hidden"});
+//						}
+//						if($(".mobileNav").css('display')=='none' || $(".mobileNav").css('display')=='none')
+//						{					
+//							$(".videoClip2, .videoClipOuter2, #controlWrapper2").css({"display":"none"});	
+//							$("#big-video-vid_html5_api").css({"visibility":"visible"});
+//						}
+//					});
+//				}
+//			}
+			var video = document.getElementById('bigPlayLink');
+			video.addEventListener('click',function(){
+													//alert("video play");
+				//video.play();
+				//$("#big-video-vid_html5_api").attr("controls", "controls");			
+			},false);
+			
+		}
+		if(navigator.userAgent.match(/(Windows NT)/i))
+		{			
+			$("#volume, #fullScreen").css({"display":"block"});
+			$(".controlPanel").css({"width":"353px"});			
+			$(".subHeaderTitle").css({"width":"115px"});
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});
+			$(".videoClipOuter2, #controlWrapper2").css({"display":"none"});
+			//$("#big-video-wrap, #big-video-vid").css({"min-height":whd,"width":ww});
+		}
+		else if(navigator.userAgent.match(/silk/i) || navigator.userAgent.match(/tablet/i) || navigator.userAgent.match(/iPad/i))
+		{
+			//alert("1");
+			$("#volume, #fullScreen, .ivxBlock").css({"display":"none"});
+			$(".controlPanel").css({"display":"none","width":"61px"});	
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});
+			$(".videoClipOuter2").css({"height":$(".homeContainer").height()});			
+			$(".videoClip2").attr("src", "assets/images/desktop-home-poster.jpg");			
+			$(".slideInfo").css({"z-index":"999"});			
+			if(ww > wh)
+			{
+				$(".videoClip2").css({"width":"102%"});	
+			}
+			else
+			{
+				$(".videoClip2").css({"width":"auto"});	
+			}			
+		}
+	}
+	
+	var mainVideo;
+	function desktopVideoOverlay()
+	{
+		$("#desktopOverlay").css({"display":"block"});
+		$(".videoClipOuter2 > .autoCenterOverlay").css({"display":"none"});
+		$(".headerSecondary > .autoCenterOverlay").css({"display":"none"});
+		mainVideo.getPlayer().on("play", function () {
+			$("#desktopOverlay").fadeOut(1000);
+			$(".videoClipOuter2 > .autoCenterOverlay > span").css({"display":"none"});
+			$(".headerSecondary > .autoCenterOverlay").delay(2000).fadeIn(1000);
+		});
+	}
+	var videoPlay=0;
+	function startvideo(){		
+		$(".controlPanel").css({"display":"none"});
+		var ww=$(window).width();
+		var wh=$(window).height();
+		var BV = new $.BigVideo({container: $('.mainContainer'),useFlashForFirefox:false,doLoop:true,controls:true});
+		BV.init();
+		mainVideo = BV;
+		var mp4Video;
+		var webmVideo;		
+		//console.log(varSpeed);		
+		if(varSpeed >= 4)
+		{
+			var videoPlay=1;
+			if(ww>1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"block"});
+			}
+			else if(ww <=1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"none"});
+			}
+			var mp4Video ="assets/video/CSM_THIS_MOMENT_Loop_5mbps.mp4";
+			var webmVideo="assets/video/CSM_THIS_MOMENT_Loop-5.webmhd.webm";				
+		}
+		else if(varSpeed >=1.6 && varSpeed<4)
+		{
+			var videoPlay=1;
+			if(ww>1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"block"});
+			}
+			else if(ww <=1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"none"});
+			}
+			var mp4Video ="assets/video/CSM_BAKERY_THIS_MOMENT_Loop_2mbps-2.mp4";
+			var webmVideo="assets/video/CSM_BAKERY_THIS_MOMENT_Loop.webmhd-2.webm";
+		}
+		else if(varSpeed >=1 && varSpeed<1.6)
+		{
+			var videoPlay=1;
+			if(ww>1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"block"});
+			}
+			else if(ww <=1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"none"});
+			}
+			var mp4Video ="assets/video/CSM_THIS_MOMENT_Loop_1mbps.mp4";
+			var webmVideo="assets/video/CSM_THIS_MOMENT_Loop-1.webmsd.webm";				
+		}
+		else if(varSpeed < 1)
+		{
+			var videoPlay=0;	
+			$("#big-video-wrap, .requestfullscreen, .headerSecondary > .autoCenterOverlay > .bigPlay > .bigPlayLink").css({"display":"none"});				
+			if(ww > 1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"block"});
+				$(".mainContainer").css({"background":"url(assets/images/desktop-home-poster.jpg) left top no-repeat","width":"100%"});
+			}
+			else if(ww <= 1024)
+			{
+				$(".headerSecondary > .autoCenterOverlay").css({"display":"none"});
+			}
+			if( ww == 767)
+			{
+				$(".videoClip2").css({"width":"auto"});
+			}
+			var mp4Video ="assets/video/CSM_THIS_MOMENT_Loop_1mbps.mp4";
+			var webmVideo="assets/video/CSM_THIS_MOMENT_Loop-1.webmsd.webm";	
+			$(".bigPlayLink").click(function(){	
+				$("#big-video-wrap").css({"display":"block"});							
+			});		
+			$(".closeVid").click(function(){				
+				$("#big-video-wrap").css({"display":"none"});
+			});
+		}
+		if(videoPlay==1){
+		//Desktop
+		var os = navigator.platform;
+		osVal = os.substr(0,3);
+		//alert("starts");
+		if(osVal == 'Win')
+		{			
+			BV.show([
+					 {type: "video/mp4", src: mp4Video}
+				]);
+			BV.getPlayer().volume(0);
+			BV.getPlayer().play();	
+			desktopVideoOverlay();
+			$(".videoClip2, .videoClipOuter2, .videoBTNMobile, #controlWrapper2").css({"display":"none"});	
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});	
+			$(".mobileVideoSection").css({"display":"none"});
+		}
+		else if(osVal == 'Mac')
+		{
+
+			if(navigator.userAgent.indexOf("Firefox")!=-1)
+			{
+				BV.show([
+						 {type: "video/webm", src: webmVideo}
+					]);
+        			BV.getPlayer().volume(0);
+				BV.getPlayer().play();
+				desktopVideoOverlay();
+				$(".videoClipOuter2, .videoBTNMobile, #controlWrapper2").css({"display":"none"});
+				$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});	
+				$(".mobileVideoSection").css({"display":"none"});
+			}
+			else
+			{
+				BV.show([
+						 {type: "video/mp4", src: mp4Video}						 
+					]);
+         			BV.getPlayer().volume(0);
+				BV.getPlayer().play();
+				desktopVideoOverlay();
+				$(".videoClipOuter2, .videoBTNMobile, #controlWrapper2").css({"display":"none"});
+				$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});	
+				$(".mobileVideoSection").css({"display":"none"});
+			}
+		}
+		else if(navigator.userAgent.match(/(Windows NT)/i))
+		{	
+			BV.show([
+				 {type: "video/mp4", src: mp4Video},
+				 {type: "video/webm", src: webmVideo}
+			]);
+			BV.getPlayer().volume(0);
+			BV.getPlayer().play();	
+			desktopVideoOverlay();
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});
+			$(".mobileVideoSection").css({"display":"none"});
+		}
+		else if(navigator.userAgent.match(/(Windows NT)/i) && navigator.userAgent.match(/(Touch)/i))
+		{	
+			BV.show([
+				 {type: "video/mp4", src: mp4Video},
+				 {type: "video/webm", src: webmVideo}
+			]);
+			BV.getPlayer().volume(0);
+			BV.getPlayer().play();	
+			desktopVideoOverlay();
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});	
+			$(".mobileVideoSection").css({"display":"none"});
+		}
+		else if (navigator.userAgent.match(/(opera mini|ipod|iphone|up.browser|up.link|mmp|symbian|smartphone|midp|wap|vodafone|o2|pocket|kindle|mobile|psp|treo|nokia|blackberry|pre\/0.1|android)/i))
+		{
+			$(".mainContainer").css({"display":"none"});
+			document.getElementById("mobileVideoTag").innerHTML = "<source src='"+mp4Video+"' type='video/mp4'>";
+			//Mobile
+			BV.show([
+				 {type: "video/mp4", src: mp4Video},
+				 {type: "video/webm", src: webmVideo}
+			]);
+			BV.getPlayer().pause();
+			$(".videoClipOuter2, .videoClipOuter2 > #controlWrapper2").css({"display":"block"});
+			$(".starVideo").on("click", function(e){				
+				$(".videoClipOuter2, #controlWrapper2").hide();		
+				$(".videoBTNMobile").css({"display":"block"});
+				BV.getPlayer().play();				
+			})
+			BV.getPlayer().on('ended', function(){
+				$(".videoClipOuter2").show();								
+			});				
+			
+			//$(".videoClipOuter2").css({"display":"none"});
+			if (ww <= 1024 && ww >= 780)
+			{
+				$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":600});
+				
+			}
+			else if (ww <= 779 && ww >= 768)
+			{
+				$(".mobileVideoSection video, .videoClip2").css({"width":"auto","height":600});
+				
+			}			
+			else if(ww <= 767 && ww >= 640)
+			{
+				$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":350});
+			}
+			else if(ww <= 639 && ww >= 361)
+			{
+				$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":300});				
+			}
+			else if(ww <= 360)
+			{
+				$(".mobileVideoSection video, .videoClip2").css({"width":"100%","height":200});				
+			}
+		}
+		else if(navigator.userAgent.match(/silk/i) || navigator.userAgent.match(/tablet/i) || navigator.userAgent.match(/iPad/i))
+		{
+			//Ipad
+			BV.show([
+				 {type: "video/mp4", src: mp4Video},
+				 {type: "video/webm", src: webmVideo}
+			]);
+			BV.getPlayer().pause();
+			$(".videoClipOuter2, #controlWrapper2").css({"display":"block"});	
+			$(".videoClipOuter2 > #controlWrapper2").css({"display":"none"});
+			$(".starVideo").css({"z-index":"999999"});
+			$(".starVideo").on("click", function(e){				
+				$(".videoClipOuter2, #controlWrapper2").hide();				
+				BV.getPlayer().play();				
+			})
+			BV.getPlayer().on('ended', function(){
+				$(".videoClipOuter2").show();								
+			});	
+			$(".bigPlayLink").click(function(){
+				$("#big-video-vid_html5_api").attr("controls", "controls");
+			});
+		}		
+		BV.getPlayer().volume(.0);			
+		$(".pause").click(function(){
+			BV.getPlayer().pause();
+			$(".pause").hide();
+			$(".play").show();
+		});			
+		$(".play").click(function(){
+			BV.getPlayer().play();
+			$(".play").hide();
+			$(".pause").show();
+		});				
+		$(".muteOff").click(function(){
+			BV.getPlayer().volume(.9);
+			$(".muteOff").hide();
+			$(".muteOn").show();
+		});				
+		$(".muteOn").click(function(){			
+			BV.getPlayer().volume(.0);
+			$(".muteOn").hide();
+			$(".muteOff").show();
+		});		
+		$(".bigPlayLink").click(function(){				
+			BV.getPlayer().volume(.9);
+			BV.getPlayer().load();
+			BV.getPlayer().play();
+            BV.getPlayer().requestFullScreen();
+			$(".controlPanel").css({"z-index":"9999999999","display":"block"});
+			$("#big-video-vid_html5_api").css({"height":"100%"});	
+			$(".vjs-default-skin").css({"top":"0px"});
+			$(".muteOff").hide();
+			$(".muteOn").show();				
+		});		
+		$(".closeVid").click(function(){			
+			BV.getPlayer().volume(0);
+            BV.getPlayer().cancelFullScreen();
+			$("#big-video-vid_html5_api").removeAttr("controls");
+			$(".controlPanel").css({"z-index":"9999999999","display":"none"});			
+		});
+		$(".restart").click(function(){			
+			BV.getPlayer().load();
+			BV.getPlayer().volume(.9);
+			BV.getPlayer().play();
+//                        BV.getPlayer().requestFullScreen();
+		});
+		var ua = window.navigator.userAgent;
+		var msie = ua.indexOf("MSIE ");
+		var isIE11 = !!navigator.userAgent.match(/Trident.*rv\:11\./);
+		if (msie > 0)   
+		{
+//			BV.getPlayer().volume(.9);
+			BV.getPlayer().volume(0);
+		}
+		}
+		
+	}	
+	$(document).on('keydown', function (e) {
+		if ( e.keyCode === 27 )
+		{ // ESC
+			$(".controlPanel").css({"display":"none"});
+			$(".videoContainer").css({"overflow":"hidden","height":"600px"});
+			document.getElementById("mobileVideoTag").muted = true;
+			$(".videoAreaIE11").css({"display":"block"});	
+			mainVideo.getPlayer().volume(0);
+		}
+	});	
+	function buttons(){
+		$(".topBtn").click(function(){			
+			var headerHeight = $(".header").height();			
+			var bannerContainer = $(".banner").height();				
+			var ww=$(window).width();
+			if(ww <= 767)
+			{
+				$('html,body').stop().animate({scrollTop: headerHeight + bannerContainer}, 1000);
+			}
+			else
+			{
+				$('html,body').stop().animate({scrollTop: 600}, 1000);
+			}
+			//return false;
+		});
+		$(".searchIcon").click(function(){
+			$(".newSearchArea").css({"display":"block"});
+		});
+		$(".closeBTN").click(function(){
+			$(".newSearchArea").css({"display":"none"});
+		});
+}
+		
+	$(document).ready(function(){
+		//$(".videoClipOuter2").hide();
+		// Entering fullscreen mode
+		$('video#mobileVideoTag').bind('webkitfullscreenchange mozfullscreenchange fullscreenchange msfullscreenchange', function(e) {
+			var state = document.fullScreen || document.mozFullScreen || document.webkitIsFullScreen || document.webkitFullScreen || document.mozCancelFullScreen;
+			var eventmsg = state ? 'FullscreenOn' : 'FullscreenOff';
+			//alert(eventmsg);
+			if(eventmsg=="FullscreenOff"){
+				if(navigator.userAgent.match(/iphone/i) || navigator.userAgent.match(/iPad/i))
+				{
+					//alert("ipad on");
+					$(".videoClipOuter2").show();
+				}
+				var player = document.getElementById("mobileVideoTag");	
+				player.pause();
+				document.getElementById("mobileVideoTag").muted = true;
+				//player.muted = true;
+				//document.getElementById("mobileVideoTag").attr("muted");
+			}
+		});	
+		
+		var player = document.getElementById("mobileVideoTag");	
+		//player.addEventListener('webkitbeginfullscreen', onVideoBeginsFullScreen, false);
+		player.addEventListener('webkitendfullscreen', onVideoEndsFullScreen, false);
+		player.addEventListener('mozendfullscreen', onVideoEndsFullScreen, false);
+		//function onVideoBeginsFullScreen(){
+			//event when full screen starts
+		//}
+		function onVideoEndsFullScreen(){
+			//alert("ends");
+			var player = document.getElementById("mobileVideoTag");	
+			player.pause();
+			document.getElementById("mobileVideoTag").muted = true;
+			mainVideo.getPlayer().volume(0);
+			$(".videoClipOuter2").show();
+		}
+	//$(".videoClipOuter2").show();
+	});		
+	function launchIntoFullscreen(element) {
+		if(element.requestFullscreen) {
+			element.requestFullscreen();
+		} else if(element.mozRequestFullScreen) {
+			element.mozRequestFullScreen();
+		} else if(element.webkitRequestFullscreen) {
+			element.webkitRequestFullscreen();
+		} else if(element.msRequestFullscreen) {
+			element.msRequestFullscreen();
+		} else if(element.webkitEnterFullscreen) {
+			element.webkitEnterFullscreen();
+		}
+	}
+	function launchVideo() {
+		if(navigator.userAgent.match(/iphone/i) || navigator.userAgent.match(/iPad/i))
+		{
+			//alert("off image");
+			$(".videoClipOuter2").hide();
+		}
+		var player = document.getElementById("mobileVideoTag");
+		player.muted=false;
+		player.play();
+		player.currentTime = 0;
+		launchIntoFullscreen(player);
+		
+		//document.getElementById("mobileVideoTag").removeattr("muted");
+		//$(".videoClipOuter2").hide();
+	}
+	
+</script>
+<style type="text/css">
+.videoContainer { height: 600px; overflow: hidden; position: relative; }
+.fill {overflow: hidden; background-size: cover;background-position: center;width:100%;height:100%}
+</style>
+</head>
+<body>
+<div id="loader"><img src="assets/images/blank.jpg" alt=""/></div>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ 
+  ga('create', 'UA-62864723-1', 'auto');
+  ga('send', 'pageview');
+ 
+</script>
+<!--<div class="mainHeader" style="background:url([*bannerImg*]) top center no-repeat #000000; height:95px;">
+  <div class="header">
+    
+    <div class="leftHeader" style="float:left;">
+      <a href="http://stage.csmbakerysolutions.com/en/"><img src="assets/images/CSM_globe_mobile.png" alt="CSM Bakery Solutions" /></a>
+   </div>     
+       <div class="clear"></div>-->
+
+<div class="header headerHome">
+  <div class="wrapper">
+    
+<!-- topLangSelect -->
+<style>
+.boxDetailcopy > a {background: transparent url('../assets/images/moreButtonEN.png') no-repeat scroll left top !important; }
+.lang { display: none; }
+.mobileNavigation2 img { margin-top: -5px; }
+@media only screen and (min-width : 760px) {
+/*.logo, .rightHeader { margin-top: 20px; }*/
+.lang { display: block; /*position: absolute;*/  height: 30px; text-align: right; }
+.lang ul { list-style: none; width: 390px; float: right; text-align: right; /* margin: 0 30px 0 0; */ }
+.lang ul li { display: inline-block; margin: 5px 0; padding: 0; border-right: 1px solid #c7c7c7; float:left; }
+.lang ul li.selected {font-weight: bold;}
+.lang ul li:last-child { border-right: 0px; }
+.lang ul li a { font-size: 13px; text-align: right; padding: 0 10px 0 10px; margin: 0; }
+}
+</style><div class="lang"><ul><li class="selected"><a href="/en/">English</a></li><li><a href="/de/">Deutsch</a></li><li><a href="/fr/">Français</a></li><li><a href="/pl/">Polski</a></li><li><a href="/el/">Ελληνικά</a></li><li><a href="/tr/">Türkçe</a></li></ul></div> 
+    <div class="logo logoVideo logoDesk"><a href=""><img src="assets/images/CSM_Master_Logo.png" alt="CSM Bakery Solutions" /></a></div>
+    <div class="logo logoVideo logoMobile"><a href=""><img src="assets/images/CSM_globe_mobile.png" alt="CSM Bakery Solutions" /></a></div>
+    <div class="rightHeader">
+      <!-- <div class="search  secondarySearch"><form class="sisea-search-form" action="" method="get">
+  <fieldset>
+    <label for="search">Search</label>
+
+    <input type="text" name="search" id="search" value="Search" onblur="this.value=(this.value=='')? 'Search' : this.value ;" onfocus="this.value=(this.value=='Search' || this.value=='Search')? '' : this.value ;"/>
+    <input type="hidden" name="id" value="7" /> 
+
+    <input type="submit" value="" />
+  </fieldset>
+</form>
+</div> -->
+      <div class="search secondarySearch"><form class="sisea-search-form" action="search/search-result.html" method="get">
+           <fieldset>
+             <label for="search">Search</label>
+             <input type="text" name="search" id="search" value="" />
+             <input type="hidden" name="id" value="7"/>
+             <input type="submit" value=""/>
+          </fieldset>
+        </form>
+      </div>
+      <div class="nav homenav">
+        <!---->
+        <ul><li class="first"><a href="javascript:void(0);" title="About Us" >About Us</a><ul><li class="first"><a href="about-us/our-company/" title="Our Company" >Our Company</a></li>
+<li><a href="about-us/our-customers.html" title="Our Customers" >Our Customers</a></li>
+<li><a href="about-us/our-values.html" title="Our Values" >Our Values</a></li>
+<li><a href="about-us/our-history/" title="Our History" >Our History</a></li>
+<li><a href="about-us/our-leaders/" title="Our Leaders" >Our Leaders</a></li>
+<li><a href="about-us/our-commitment.html" title="Our Commitment" >Our Commitment</a></li>
+<li class="last"><a href="about-us/our-locations/" title="Our Locations" >Our Locations</a></li>
+</ul></li>
+<li><a href="javascript:void(0);" title="Products" >Products</a><ul><li class="first"><a href="products/our-products/" title="Our Products" >Our Products</a></li>
+<li><a href="products/our-brands/" title="Our Brands" >Our Brands</a></li>
+<li class="last"><a href="products/our-websites.html" title="Our Websites" >Our Websites</a></li>
+</ul></li>
+<li><a href="newsroom/" title="Newsroom" >Newsroom</a></li>
+<li><a href="careers.html" title="Careers" >Careers</a></li>
+<li class="last"><a href="contact-us/" title="Contact Us" >Contact Us</a></li>
+</ul> </div>
+      <div class="mobileNavigation2"> <!-- <a class="allNav2" href="javascript:void(0)"><img src="assets/images/navIcon.png" alt="CSM Bakery Solutions"></a>
+        <div style="display: none;" class="mobileTopnavigation2">
+          <ul>
+            <li><a href="javascript:void(0);" title="Language" class="langLink">Languages</a>
+              <ul>
+                <li><a href="" title="Our Business">Our Company</a></li>
+                <li><a href="" title="Our Customers">Our Customers</a></li>
+                <li><a href="" title="Our History">Our History</a></li>
+                <li><a href="" title="Our Leaders">Our Leaders</a></li>
+                <li><a href="" title="Our Commitment">Our Commitment</a></li>
+                <li><a href="" title="Our Locations">Our Locations</a></li>
+              </ul>
+            </li>
+          </ul> -->
+          <label for="langselect"><a href="http://stage.csmbakerysolutions.com/select-a-language.html"><img src="assets/images/globe-blu.png" width="35px" /></a>
+          <!-- <select name="langselect" id="langselect"><option value="/en/">English</option><option value="/de/">Deutsch</option></select> -->
+        </div>
+      </div>
+      <div class="mobileNavigation"> <a class="allNav" href="javascript:void(0)"><img src="assets/images/navIcon.png" alt="CSM Bakery Solutions"></a>
+        <div style="display: none;" class="mobileTopnavigation">
+          <ul>
+            <li><a href="javascript:void(0);" title="About Us" class="aboutLink">About Us</a>
+              <ul>
+                <li><a href="about-us/our-company/" title="Our Business">Our Company</a></li>
+                <li><a href="about-us/our-customers.html" title="Our Customers">Our Customers</a></li>
+                <li><a href="about-us/our-history/" title="Our History">Our History</a></li>
+                <li><a href="about-us/our-leaders/" title="Our Leaders">Our Leaders</a></li>
+                <li><a href="about-us/our-commitment.html" title="Our Commitment">Our Commitment</a></li>
+                <li><a href="about-us/our-locations/" title="Our Locations">Our Locations</a></li>
+              </ul>
+            </li>
+            <li><a href="javascript:void(0);" title="Products" class="productLink">Products</a>
+              <ul>
+                <li><a href="products/our-products/" title="Our Products">Our Products</a></li>
+                <li><a href="products/our-brands/" title="Our Brands">Our Brands</a></li>
+                <li><a href="products/our-websites.html" title="Our Websites">Our Websites</a></li>
+              </ul>
+            </li>
+            <li><a href="newsroom/" title="Newsroom">Newsroom</a></li>
+            <li><a href="careers.html" title="Careers">Careers</a></li>
+            <li><a href="contact-us/" title="Contact">Contact Us</a></li>
+            <li><a href="search.html" title="Search">Search</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">   
+$(document).ready(function() {
+	$(".allNav").click(function(){
+		if(!$(".mobileTopnavigation").is(":visible"))
+		{
+			$(".mobileTopnavigation").slideDown("slow");
+			
+		}
+		else if($(".mobileTopnavigation").is(":visible"))
+		{
+			$(".mobileTopnavigation").slideUp(1000,function(){
+				
+			});
+		}
+	});
+	$(".allNav").click(function(){
+		var url = window.location.toString();
+		$(".mobileTopnavigation li").each(function(){
+			var href = $(this).children("a").attr("href").split(".html");
+			if(href[0] != "#" && url.indexOf(href[0]) != -1)
+			{
+				$(this).children("a").addClass("active");	
+			}
+		})
+	});
+	$(".allNav2").click(function(){
+		if(!$(".mobileTopnavigation2").is(":visible"))
+		{
+			$(".mobileTopnavigation2").slideDown("slow");
+			
+		}
+		else if($(".mobileTopnavigation2").is(":visible"))
+		{
+			$(".mobileTopnavigation2").slideUp(1000,function(){
+				
+			});
+		}
+	});
+	$(".allNav2").click(function(){
+		var url = window.location.toString();
+		$(".mobileTopnavigation2 li").each(function(){
+			var href = $(this).children("a").attr("href").split(".html");
+			if(href[0] != "#" && url.indexOf(href[0]) != -1)
+			{
+				$(this).children("a").addClass("active");	
+			}
+		})
+	});
+	
+});
+</script>
+<div class="banner" id="banner">
+  <div class="videoContainer" id="fullscreen">
+    <!--Video Section-->
+    <div class="homeContainer" style="position:relative">
+      <div id="desktopOverlay" class="desktopOverlay" style="float:left; width:100%; height:600px; position:relative; display:none; background-color:#000000;"><img src="assets/images/ajax-loader.gif" alt="" style="position:absolute; top:40%; left:48%;"/></div>
+      <div class="mainContainer" id="fullIEScreen"></div>
+      <div class="mobileVideoSection" id="mobileVideoSection">
+        <video id="mobileVideoTag" controls>
+          <!--<source src="" type="video/mp4">-->
+        </video>
+      </div>
+      <div class="videoClipOuter2">
+        <div class="autoCenterOverlay"><span>At CSM Bakery Solutions, we connect.<br />Bakeries and businesses create.<br />People everywhere enjoy.</span>
+          <div class="bigPlay"><a href="javascript:void(0)" onClick="launchVideo()"><img src="assets/images/playBigTwo.png" alt="play"/></a></div>
+        </div>
+        <img src="assets/images/desktop-home-poster.jpg" alt="OverImage" class="videoClip2"> </div>
+    </div>
+    <div class="videoBTNMobile">
+      <div class="videoArea">
+        <div id="pause"> <a href="javascript:void(0)" class="pause"> </a> <a class="play" href="javascript:void(0)" style="display:none"> </a> </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+  </div>
+  <!--Video Section-->
+  <div class="controlPanel" style="display:none;">
+    <div class="clear"></div>
+    <div class="overlayControl">
+      <div id="controlWrapper">
+        <div id="pause"> <a class="pause" href="javascript:void(0)"></a> <a href="javascript:void(0)" class="play" style="display:none" ></a> </div>
+        <div id="restart"> <a class="restart" href="javascript:void(0)"></a></div>
+        <div  id="volume"> <a class="muteOff" href="javascript:void(0)"></a> <a href="javascript:void(0)" style="display:none"  class="muteOn" ></a> </div>
+        <div id="closeVid"> <a class="closeVid" href="javascript:void(0)"></a></div>
+        <!-- div style="float: right; position: relative; bottom: 6px; padding-right: 10px;"  class="ivxBlock"><img src="assets/temp/ivxStacked.png" class="ivxOverlay" / -->
+          <div class="overtext" id="overtext">
+            <!-- div style="width: 85%; margin-left: 22px;">IVX video websites and software are developed by Automatic Corporation</div -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="btmHeader">
+  <div class="headerSecondary">
+    <!--<a class="topBtn" href="javascript:void(0)" title="Go Bottom"><img src="assets/temp/down-arrow.png" alt="Top Button" /></a>-->
+    <div class="autoCenterOverlay" style="display:none;">At CSM Bakery Solutions, we connect.<br />Bakeries and businesses create.<br />People everywhere enjoy.
+      <div class="bigPlay"><a class="bigPlayLink" id="bigPlayLink" href="javascript:void(0)"><img src="assets/images/playBigTwo.png" alt="play"/></a> <a class="requestfullscreen" href="http://stage.csmbakerysolutions.com/index/homevideoie11colorboxvalue.html"><img src="assets/images/playBigTwo.png" alt="play"/></a></div>
+    </div>
+    <div class="autoCenter"> <span class="ThirstyScriptMedium" contenteditable="true">connecting the world of baking</span>&nbsp;<span class="trademarkSymbols">&#0153;</span></div>
+  </div>
+</div>
+<div class="contentArea">
+  <div class="autoCenter">
+    <div class="box1 lightBlue">
+      <div class="boxDetail" id="boxDetailOne"><a class="touchMore" href="javascript:void(0)"></a><img src="" class="boxImage" id="boxImageOne" alt="" />
+        <div class="boxDetailcopy">
+          <p>CSM Bakery Solutions is proud to release a Supplier Code of Conduct detailing the expectations CSM Bakery Solutions sets for its third party suppliers.</p>
+          <!-- <a href=""></a> -->
+          <a href="http://stage.csmbakerysolutions.com/en/newsroom/new-and-noteworthy/expectations-for-our-suppliers.html"></a> 
+        </div>
+      </div>
+      <div class="boxTitle boxTitleOne">
+        <div class="boxTitleSection">Expectations for Our Suppliers</div>
+      </div>
+    </div>
+    <div class="box2 green">
+      <div class="boxDetail" id="boxDetailTwo"><a class="touchMoreTwo" href="javascript:void(0)"></a><img src="assets/images/homecallout/Spotlight-IDDBA-pre-show.jpg" class="boxImage" alt="" />
+        <div class="boxDetailcopy">
+          <p>CSM Bakery Solutions will exhibit at the International Dairy Deli and Bakery Association Seminar and Expo (IDDBA) from June 5 – 7th at the George R. Brown Convention Center in Houston, Texas. With over 9,000 attendees, IDDBA is the largest and most targeted conference in the world serving the dairy, deli and bakery categories.</p>
+           <!-- <a href=""></a></div> -->
+         <a href="http://stage.csmbakerysolutions.com/en/newsroom/new-and-noteworthy/csm-to-exhibit-at-iddba-2016.html"></a></div>    
+      </div>
+      <div class="boxTitle">
+        <div class="boxTitleSection">CSM to Exhibit at IDDBA 2016</div>
+      </div>
+    </div>
+    <div class="box3 brown">
+      <div class="boxDetail" id="boxDetailThree"><a class="touchMore" href="javascript:void(0)"></a><img src="assets/images/homecallout/Spotlight-NRA-2016.jpg" class="boxImage" id="boxImageThree" alt="" />
+        <div class="boxDetailcopy">
+          <p>CSM Bakery Solutions attended the National Restaurant Association (NRA) Show in Chicago as exhibiting partners with Middleby Corporation. Over three days 62,000 foodservice suppliers and operators roamed the exhibitor floor seeking the best the industry has to offer in terms of innovation, while CSM’s Chef Morgan Larsson commanded a corner of the Middleby booth creating delicious desserts using 3-D printing technology. </p>
+          <a href="http://stage.csmbakerysolutions.com/en/newsroom/new-and-noteworthy/csm-showcases-innovation-at-premier-foodservice-tradeshow.html"></a>
+        </div>
+      </div>
+      <div class="boxTitle boxTitleThree">
+        <div class="boxTitleSection">CSM Showcases Innovation at Premier Foodservice Tradeshow</div>
+      </div>
+    </div>
+    <div class="box4 lightBlue">
+      <div class="boxDetail" id="boxDetailFour"><a class="touchMoreTwo" href="javascript:void(0)"></a><img src="assets/images/homecallout/Spotlight-Image-National-Donut-Week.jpg" class="boxImage" alt="" />
+        <div class="boxDetailcopy">
+          <p>National Doughnut Week, observed in the U.K. from May 7-15th, is celebrating its 25th year of fundraising with expectations of the best week yet! This event, sponsored by CSM Bakery Solutions, raises funds for The Children’s Trust, U.K.’s leading charity for children with brain injury.</p>
+         <!--<a href=""></a></div>  -->
+         <a href="http://stage.csmbakerysolutions.com/en/newsroom/new-and-noteworthy/national-doughnut-week-25th-anniversary.html"></a></div>    
+      </div>
+      <div class="boxTitle">
+        <div class="boxTitleSection">National Doughnut Week’s 25th Anniversary</div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="ourBrandsTitle">Our Brands<br />
+      <div class="line">&nbsp;</div>
+    </div>
+  </div>
+  <div class="slidesLine">
+    <div id="slides" class="iconSlide">
+      <div class="slideWrapper">
+        <ul id="client-slider">
+          <li class='brnadListing'><a href=''><img src='assets/images/brands/arkady-white-three.png' alt='Arkady' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/artisal-white.png' alt='Artisal' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Bakemark-white.png' alt='BakeMark' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Baker-Baker-white.png' alt='Baker & Baker' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/BakeSense-White.png' alt='BakeSense' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Braims-white.png' alt='Braims' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/brill-white.png' alt='Brill' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Craigmillar-white.png' alt='Craigmillar' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Croexsa-white.png' alt='Croexa' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Goldfrost-white.png' alt='Goldfrost' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/henry-henry-white.png' alt='Henry & Henry' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Karps-white.png' alt='Karps' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/kates-white.png' alt='Kates Cakes' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/marguerite-white.png' alt='Marguerite' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Masterline-white.png' alt='Masterline' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Meistermarken-white.png' alt='MeisterMarker' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Molco-white.png' alt='Molco' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/multifoods-white.png' alt='Multifoods' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Trigal_Dorado-white.png' alt='Trigal Dorado' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Ulmer-Spatz-white.png' alt='Ulmer Spatz' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Waldkorn-white.png' alt='Waldkorn' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/westco-white.png' alt='Westco' class='brandImg'></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="slidersource" style="display:none;">
+  <ul id='client-slider'>
+    <li class='brnadListing'><a href=''><img src='assets/images/brands/arkady-white-three.png' alt='Arkady' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/artisal-white.png' alt='Artisal' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Bakemark-white.png' alt='BakeMark' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Baker-Baker-white.png' alt='Baker & Baker' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/BakeSense-White.png' alt='BakeSense' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Braims-white.png' alt='Braims' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/brill-white.png' alt='Brill' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Craigmillar-white.png' alt='Craigmillar' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Croexsa-white.png' alt='Croexa' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Goldfrost-white.png' alt='Goldfrost' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/henry-henry-white.png' alt='Henry & Henry' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Karps-white.png' alt='Karps' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/kates-white.png' alt='Kates Cakes' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/marguerite-white.png' alt='Marguerite' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Masterline-white.png' alt='Masterline' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Meistermarken-white.png' alt='MeisterMarker' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Molco-white.png' alt='Molco' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/multifoods-white.png' alt='Multifoods' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Trigal_Dorado-white.png' alt='Trigal Dorado' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Ulmer-Spatz-white.png' alt='Ulmer Spatz' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/Waldkorn-white.png' alt='Waldkorn' class='brandImg'></a></li>
+<li class='brnadListing'><a href=''><img src='assets/images/brands/westco-white.png' alt='Westco' class='brandImg'></a></li>
+  </ul>
+</div>
+<div class="footer">
+<!-- <div class="lang2"><center><p><a href="/">English</a> | <a href="/de">Deutsch</a></center></div> -->
+  <div class="wrapper">    
+    <div class="footerNav">
+      <ul>
+        <li><a href="disclaimer.html">Disclaimer</a></li><li class="divider">|</li>
+        <li><a href="terms.html">Terms</a></li><li class="divider">|</li>
+        <li><a href="privacy-policy.html">Privacy Policy</a></li><li class="divider">|</li>
+        <li><a href="sitemap.html">Sitemap</a></li><li class="divider">|</li>
+        <li><a href="california-transparency-in-supply-chains-act-of-2010.html">S.B. 657 Supply Chains Act</a></li>
+      </ul>
+    </div>
+<div class="copyright">&copy; Copyright 2016 CSM Bakery Solutions</div>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+	var wh=$(window).height();
+	var dh=$(document).height();	
+	if(wh >= dh)
+	{
+		$('.footer').css({"position":"fixed"});
+	}
+	else {
+		$('.footer').css({"position":"relative"});		
+	}	
+});
+$(window).resize(function() {	
+	var wh=$(window).height();
+	var dh=$(document).height();	
+	if(wh >= dh)
+	{
+		$('.footer').css({"position":"fixed"});
+	}
+	else {
+		$('.footer').css({"position":"relative"});		
+	}
+});
+</script>
+<script>
+    $(function(){
+      // bind change event to select
+      $('#langselect').on('change', function () {
+          var url = $(this).val(); // get selected value
+          if (url) { // require a URL
+              window.location = url; // redirect
+          }
+          return false;
+      });
+    });
+</script>
+</body>
+</html>
+</body>
+</html>

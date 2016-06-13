@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+@media (min-width:320px) and (max-width:1027px){
+.screen, #volume, #fullScreen, .ivxBlock {
+    display: block !important;
+}
+.controlPanel {
+    height: 70px !important;
+    width: 300px !important;
+}
+}
+
+@media (min-width:320px) and (max-width:767px){
+body { background-color: #ffffff !important; }
+.mainHeader { height: 110px !important; }
+#headercontainer { position: fixed; top: 0px; }
+#footercontainer_home {
+    height: 49px;
+    position: fixed;
+    z-index: 99999;
+}
+#footercontainer { height: 49px; }
+.videoClipOuter { display: block !important; padding-top: 50px !important; }
+.controlPanel { top: 0px !important; position: relative !important; }
+.slideDetails3 { height: 350px; }
+.slideInfo { display: none !important; }
+.copyright {     text-align: center;
+    width: 100%; line-height: 24px; padding-left: 0px; }
+.footer_menu { width: 100%; text-align: center; }
+.footer_menu ul li { line-height: 24px; }
+#big-video-vid_html5_api{width: 100% !important;}
+}

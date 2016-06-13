@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html> 
+<head> 
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8"> 
+  <title>Google Maps Multiple Markers</title> 
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyqLywtRdPq21DKjVtkGWXcvaN-Q8kKaU&sensor=true"></script></head> 
+<body>
+  <div id="map" style="width: 100%; height:900px;"></div>
+  
+  <script>
+    // Define your locations: HTML content for the info window, latitude, longitude
+	function initialize(lattitude,longitude) 
+	{
+    var locations = [
+      
+	  ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 39.91023, -94.047125],
+      ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 43.708853, -88.50596],
+      ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 44.718276, -96.246357],
+      ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 44.718276, -105.651935],
+      ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 42.283534, -112.144058],
+      ['<div class="locationPopup">Houston, Texas - Location Title<br /> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum augue ullamcorper, semper<br />Location Address<br /><strong>Phone:</strong> xxx.xxx.xxxx<br /><strong>Email:</strong> xxx@xxx.com<div>', 35.984948, -113.630381],
+	  
+		['<h4>Brazil Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', -16.551587, -66.52239],
+
+		['<h4> Brazil Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', -22.811926, -57.101319],
+
+		['<h4>Brazil Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', -35.675147, -71.542969],
+
+		['<h4>Brazil Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', -35.259925, -65.665857],
+			 
+			['<h4>Russia Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', 46.832306, 103.410837],
+
+			['<h4> Russia Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', 48.219986, 69.253956],
+
+			['<h4>Russia Aliquam quis ligula risus. Nunc fringilla ligula consectetur urna viverra, eu euismod dui commodo. Vivamus bibendum lobortis enim. Aliquam dictum venenatis volutpat.</h4>', 59.815128, 74.175383]
+		
+    ];
+    
+    // Setup the different icons and shadows
+   // var iconURLPrefix = 'http://maps.google.com/mapfiles/ms/icons/';
+    
+    var icons = [
+  'icons/globe.png', 
+ // 'icons/beachflag.png', 
+  //'icons/button_brolly.png', 
+    ]
+    var iconsLength = icons.length;
+	var festivalMapZoomMax = 12;
+	var festivalMapZoomMin = 4;
+    var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 2,
+		center: new google.maps.LatLng(lattitude,longitude),
+		maxZoom:festivalMapZoomMax,
+		minZoom:festivalMapZoomMin,
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+     
+    });
+
+    var infowindow = new google.maps.InfoWindow({
+      maxWidth: 160,
+    });
+
+	/* var flightPlanCoordinates = [
+			new google.maps.LatLng(39.91023, -94.047125),
+			new google.maps.LatLng(43.708853, -88.50596),
+			new google.maps.LatLng(44.718276, -96.246357),
+			new google.maps.LatLng(44.718276, -105.651935),
+			new google.maps.LatLng(42.283534, -112.144058),
+			new google.maps.LatLng(35.984948, -113.630381),
+			new google.maps.LatLng(39.91023, -94.047125),
+			new google.maps.LatLng(44.718276, -96.246357),
+			new google.maps.LatLng(39.91023, -94.047125),
+			new google.maps.LatLng(44.718276, -105.651935),
+			new google.maps.LatLng(39.91023, -94.047125),
+			new google.maps.LatLng(42.283534, -112.144058)
+        ];
+     var flightPath = new google.maps.Polyline({
+			path: flightPlanCoordinates,
+			geodesic: true,
+			strokeColor: '#FF0000',
+			strokeOpacity: 1.0,
+			strokeWeight: 2
+  });
+
+  flightPath.setMap(map);*/
+	
+    var markers = new Array();
+    
+    var iconCounter = 0;
+    
+    // Add the markers and infowindows to the map
+    for (var i = 0; i < locations.length; i++) {  
+      var marker = new google.maps.Marker({
+        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+        map: map,
+		 draggable: true,
+        icon: icons[iconCounter]
+      });
+
+      //markers.push(marker);
+
+      google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+          infowindow.setContent(locations[i][0]);
+          infowindow.open(map, marker);
+        }
+      })(marker, i));
+      
+      iconCounter++;
+      // We only have a limited number of possible icon colors, so we may have to restart the counter
+      if(iconCounter >= iconsLength) {
+      	iconCounter = 0;
+      }
+    }
+	}
+google.maps.event.addDomListener(window, 'load', initialize(35.646338,-102.761333));
+
+    function autoCenter() {
+      //  Create a new viewpoint bound
+      var bounds = new google.maps.LatLngBounds();
+      //  Go through each...
+      for (var i = 0; i < markers.length; i++) {  
+				bounds.extend(markers[i].position);
+      }
+      //  Fit these bounds to the map
+      map.fitBounds(bounds);
+    }
+    autoCenter();
+  </script> 
+          <div style="float:left; width:80%; ">
+          <form id="locator" name="locator" method="post" action="" class="locator">
+            <label for="commercialOffices" style="float:left; width:100%; height:30px;">
+              <input id="commercialOffices" name="commercialOffices" type="checkbox" value="Commercial Offices" checked="checked" />
+              Commercial Offices</label>
+            <label for="brazil" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="brazil" name="brazil" type="checkbox" value="brazil"onclick="initialize(-7.040267,-55.415499);" />
+              Brazil</label>
+            <label for="Russia" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="Russia" name="Russia" type="checkbox" value="Russia" onclick="initialize(62.173611,94.971391);" />
+              Russia</label>
+			  
+            <!--  <label for="manufacturingFacilities" style="float:left; width:100%; height:30px;">
+              <input id="manufacturingFacilities" name="manufacturingFacilities" type="checkbox" value="Manufacturing Facilities" />
+              Manufacturing Facilities</label>
+			  <label for="brazil" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="brazil1" name="brazil" type="checkbox" value="brazil"onclick="initialize(-7.316864,-57.462726);" />
+              Brazil</label>
+			  <label for="Russia" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="Russia1" name="Russia" type="checkbox" value="Russia" onclick="initialize(62.226161,93.185017);" />
+              Russia</label>
+			  
+			  
+              <label for="RDFacilities" style="float:left; width:100%; height:30px;">
+              <input id="RDFacilities" name="RDFacilities" type="checkbox" value="R&D Facilities" />
+              R&D Facilities </label>
+			  <label for="brazil" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="brazil2" name="brazil" type="checkbox" value="brazil"onclick="initialize(-7.316864,-57.462726);" />
+              Brazil</label>
+			  <label for="Russia" style="float:left; width:90%; padding-left: 10%; height:30px;">
+              <input id="Russia2" name="Russia" type="checkbox" value="Russia" onclick="initialize(62.226161,93.185017);" />
+              Russia</label>-->
+          </form>
+        </div>
+</body>
+</html>

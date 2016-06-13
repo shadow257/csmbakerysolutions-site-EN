@@ -1,0 +1,43 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*
+.selectRegion { float: right; }
+
+.calendar {
+    width: 38px;
+}
+.haccordion {
+    float: right;
+    position: fixed;
+    right: 0;
+    top: 130px;
+    width:50px;
+    z-index: 99999999;
+}
+.haccordion .header { cursor: pointer; float: right; }
+.haccordion .content { background: url("../assets/images/style/select-area-stone.png") no-repeat scroll left bottom transparent; color: #808080; float: right; height: 183px; position: relative;   width: 38px; }
+.haccordion .active .content { background: url("../assets/images/style/select-area-stone.png") no-repeat scroll left top transparent !important; }
+
+.mapLink {
+    color: #fff;
+    font-size: 11px;
+    height: 178px !important;line-height: 11px;padding: 0 0 0 38px;
+width: 160px;
+}
+.mapLink ul {
+    background: none repeat scroll 0 0 #000000;
+    float: left;
+    height: 485px;
+    margin: 8px 0 0;
+    padding: 10px 0 17px 14px;
+   
+}
+ul {
+    list-style: outside none none;
+}
+.mapLink ul li {
+    display: block;
+    line-height: 16px;
+    list-style: outside none none;
+}*/
